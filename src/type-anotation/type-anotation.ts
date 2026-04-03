@@ -12,14 +12,88 @@ let arrayDeStrings2: string[] = ['a', 'b'];
 
 //Objetos
 
-let pessoa: {nome: string, idade: number, adulto?: boolean} = {
-    idade: 30,
-    nome: 'Luiz'
-}
-
 //Funções
 function soma(x: number, y: number): number {
     return x + y;
 }
 
 const soma2: (x: number, y: number) => number = (x, y) => x + y;
+
+// Tipo Any
+function showMessage(mgs: any) {
+    return mgs;
+}
+
+//Utilize Any em apenas em último caso
+console.log(showMessage([1, 2, 3]));
+console.log(showMessage('Olá'));
+console.log(showMessage(1));
+
+
+//Tipo Void
+
+function semRetorno(...args: string[]): void{
+    console.log(args.join( ''));
+}
+const pessoa = { 
+    nome: 'Luiz',
+    sobrenome: 'Otávio',
+
+    exibirNome(): void{
+        console.log(this.nome + '' + this.sobrenome);
+    },
+};
+
+semRetorno ('Luiz', 'Otávio');
+
+export {pessoa};
+
+// Tipo objects  
+
+const objetoA: {
+     readonly chaveA: string,
+    chaveB: string
+} = {
+    chaveA: 'Valor A',
+    chaveB: 'Valor B'
+};
+
+objetoA.chaveB = 'Outro valor';
+
+console.log(objetoA);
+
+//  Array <T> -T[]
+ export function toUpperCase(...args: string[]): string[] {
+    return args.map((valor) => valor.toUpperCase());
+}
+
+export function concatenaString(...args: string[]): string {
+    return args.reduce((ac, valor) => ac + valor, '');
+}
+
+const result = toUpperCase('a', 'b', 'c');
+const conctenacao = concatenaString('a', 'b', 'c');
+const upper = toUpperCase ('a', 'b' , 'c')
+
+console.log(result);
+console.log(conctenacao);
+
+// Tipo Tuple
+const dadosCliente1: [number , string] = [1, 'Luiz'];
+const dadosCliente2: [number , string, string] = [1, 'Luiz', 'Miranda'];
+const dadosCliente3: [number , string, string?] = [1, 'Luiz', 'Miranda'];
+
+//dadosCliente1[0] = 100;
+//dadosCliente1[1] = 'Carlos';
+
+
+console.log(dadosCliente1);
+console.log(dadosCliente2);
+console.log(dadosCliente3);
+
+//readonly
+const array1: readonly string[] = ['Luiz', 'Otavio'];
+const array2: ReadonlyArray<string> = ['Luiz' , 'Otavio'];
+
+console.log(array1);
+console.log(array2);
