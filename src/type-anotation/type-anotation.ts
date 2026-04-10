@@ -98,7 +98,6 @@ const array2: ReadonlyArray<string> = ['Luiz' , 'Otavio'];
 console.log(array1);
 console.log(array2);
 
-// Type null e undefined
 let x;
 if (typeof x === 'undefined') x = 20;
 console.log(x * 2);
@@ -133,3 +132,21 @@ function criaErro (): void {
 }
 
 criaErro();
+
+// Types Literais 
+let x2 = 10; // eslit-disable-line
+x2 = 0b1010010;
+const y = 10;
+const a = 100;
+
+const pessoa2 = {
+    nome: 'Luiz',
+    sobrenome: 'Otávio',
+};
+
+function escolhaCor( cor: 'Vermelho' | 'Amarelo' | 'Azul') {
+    return cor;
+}
+console.log(escolhaCor ('Vermelho'));
+
+export default 1;
