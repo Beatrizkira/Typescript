@@ -40,7 +40,7 @@ const pessoa = {
     sobrenome: 'Otávio',
 
     exibirNome(): void{
-        console.log(this.nome + '' + this.sobrenome);
+        console.log(this.nome + ' ' + this.sobrenome);
     },
 };
 
@@ -72,11 +72,10 @@ export function concatenaString(...args: string[]): string {
 }
 
 const result = toUpperCase('a', 'b', 'c');
-const conctenacao = concatenaString('a', 'b', 'c');
-const upper = toUpperCase ('a', 'b' , 'c')
+const concatenacao = concatenaString('a', 'b', 'c');
 
 console.log(result);
-console.log(conctenacao);
+console.log(concatenacao);
 
 // Tipo Tuple
 const dadosCliente1: [number , string] = [1, 'Luiz'];
@@ -150,3 +149,29 @@ function escolhaCor( cor: 'Vermelho' | 'Amarelo' | 'Azul') {
 console.log(escolhaCor ('Vermelho'));
 
 export default 1;
+
+//Type alias
+
+type Idade = number;
+type Pessoa = {
+    nome: string;
+    idade: Idade;
+    salario: number;
+    corPreferida?: string;
+
+};
+type CorRGB = 'Vermelho' | 'Verde' | 'Azul';
+type CorCMYK = 'Ciano' | 'Margenta' | 'Amarelo' | 'Preto';
+type CorPreferida = CorRGB | CorCMYK;
+
+const pessoa: Pessoa = {
+    idade: 30,
+    nome: 'Luiz',
+    salario: 1000
+};
+
+export function setCorPreferida (pessoa: Pessoa, cor: CorPreferida): Pessoa {
+    return {...pessoa, corPreferida: cor};
+}
+
+ console.log(setCorPreferida(pessoa, 'Azul'));
