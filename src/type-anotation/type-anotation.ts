@@ -97,7 +97,7 @@ const array2: ReadonlyArray<string> = ['Luiz' , 'Otavio'];
 console.log(array1);
 console.log(array2);
 
-let x;
+let x: any;
 if (typeof x === 'undefined') x = 20;
 console.log(x * 2);
 
@@ -135,7 +135,6 @@ criaErro();
 // Types Literais 
 let x2 = 10; // eslit-disable-line
 x2 = 0b1010010;
-const y = 10;
 const a = 100;
 
 const pessoa2 = {
@@ -164,7 +163,7 @@ type CorRGB = 'Vermelho' | 'Verde' | 'Azul';
 type CorCMYK = 'Ciano' | 'Margenta' | 'Amarelo' | 'Preto';
 type CorPreferida = CorRGB | CorCMYK;
 
-const pessoa: Pessoa = {
+const pessoaTest: Pessoa = {
     idade: 30,
     nome: 'Luiz',
     salario: 1000
@@ -174,4 +173,99 @@ export function setCorPreferida (pessoa: Pessoa, cor: CorPreferida): Pessoa {
     return {...pessoa, corPreferida: cor};
 }
 
- console.log(setCorPreferida(pessoa, 'Azul'));
+ console.log(setCorPreferida(pessoaTest, 'Azul'));
+
+ // Intersection Type
+
+type TemNome = {nome: string};
+type TemSobrenome = {sobrenome: string};
+type TemIdade = {idade: number};
+
+type AB = 'A' | 'B';
+type AC = 'A' | 'C';
+type AD = 'D' | 'A';
+type Intersection = AB & AC & AD;
+
+type UnionPessoa = TemNome | TemSobrenome | TemIdade;
+
+const pessoaUnion: UnionPessoa = {
+  nome: 'Luiz',
+  sobrenome: 'Miranda',
+  idade: 30
+};
+
+console.log(pessoaUnion);
+
+export {pessoaUnion};
+ 
+
+type mapStringCallback = (item: string) => string;
+
+function mapString(array: string[], callbackfn: mapStringCallback): string[] {
+  const newArray: string[] = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const item = array[i];
+    newArray.push(callbackfn(array[i]));
+  }
+
+  return newArray;
+}
+
+const abc = ["a", "b", "c"];
+const abcMapped = mapString(abc, (item) => item.toUpperCase());
+console.log(abc);
+console.log(abcMapped);
+
+type VerifyUserFn = (user: User, sentValue: User) => boolean;
+type User = { username: string; password: string };
+
+const verifyUser: VerifyUserFn = (user, sentValue) => {
+  return (
+    user.username === sentValue.username && user.password === sentValue.password
+  );
+};
+
+const bdUser = { username: "joao", password: "123456" };
+const sentUser = { username: "joao", password: "123456" };
+const loggedIn = verifyUser(bdUser, sentUser);
+console.log(loggedIn);
+
+//Type Unkown
+
+x = 100;
+x = "Luiz";
+x = 900;
+x = 10;
+let y = 800;
+
+if (typeof x === "number") console.log(x + y);
+
+// Union Types
+function addOrConcat(a: number | string, b: number | string): number | string {
+  if (typeof a === "number" && typeof b === "number") return a + b;
+  return `${a}${b}`;
+}
+ //*Recomendado*//
+// Condicional
+const body = document.querySelector('body');
+ if (body) body.style.background = 'red';
+
+  //Type assertion
+ const body3 = document.querySelector('body') as HTMLBodyElement;
+ body3.style.background = 'red';
+
+  //HTMLElement
+ const input = document.querySelector('input') as HTMLInputElement;
+ input.value = 'Qualquer coisa';
+ input.focus();
+
+ //* Não recomendado *//
+
+ // Non-null Assertion (!)
+ const body2 = document.querySelector('body')!;
+ body2.style.background=  'red';
+
+
+ // Type assertion
+ const body4 = (document.querySelector('body') as unknown) as number;
