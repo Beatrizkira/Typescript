@@ -3,7 +3,7 @@ export function isNumber (value:unknown): value is number {
 
 }
     
- export function soma <T>(...args: T[]): number | null {
+ export function soma <T extends number>(...args: T[]): number | null {
     const retorno = args.reduce((sum, value) => {
         if(isNumber(sum) && isNumber(value)){
             return sum + value;
@@ -14,5 +14,5 @@ export function isNumber (value:unknown): value is number {
  }
 
  console.log(soma(1, 2, 3));
- console.log(soma (...[1, 2, 3, 'a', 'b', 'c', 1]));
- console.log(soma ('a', 'b', 'c'))
+ console.log(soma(...[1, 2, 3]));
+ console.log(soma(4, 5, 6));

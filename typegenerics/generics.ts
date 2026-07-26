@@ -25,6 +25,6 @@ const arrayFiltradoOriginal = array.filter((value) => value > 5);
 console.log(arrayFiltradoOriginal);
 
 const arrayFiltrado = meuFilter(array, (value) => {
-    if (typeof value === 'number') return value < 5;
+    return (typeof value === 'number') ? value < 5 : false;
 });
 console.log(arrayFiltrado);
